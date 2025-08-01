@@ -3,7 +3,7 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   css: ['@/assets/css/global.css'],
-  
+
   runtimeConfig: {
     maptilerApiKey: process.env.MAPTILER_API_KEY,          // only on server
     public: {
@@ -17,11 +17,21 @@ export default defineNuxtConfig({
     '@nuxt/icon',
     '@nuxt/image',
     '@nuxt/scripts',
-    'nuxt-svgo'
+    'nuxt-svgo',
+    '@pinia/nuxt',
+    '@nuxtjs/device'
   ],
-  
+
+  fonts: {
+    defaults: {
+      weights: ['100 900'],
+    },
+
+  },
+
   app: {
     head: {
+      title: `AmpUp`,
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.svg' }
       ]

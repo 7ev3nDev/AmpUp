@@ -1,21 +1,43 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 import {
   MglMap,
   MglGeoJsonSource,
   MglLineLayer,
 } from '@indoorequal/vue-maplibre-gl';
+import type { Map } from 'maplibre-gl';
+import 'maplibre-gl/dist/maplibre-gl.css'
+
+import DefaultSideBar from "~/components/DefaultSideBar.vue";
 
 const mapStyleUrl = 'https://api.maptiler.com/maps/toner-v2/style.json?key=r1YS7QfxD3sbOvLMbT9K'
 const geojsonUrl = '/api/venues.geojson'
 
-const map = ref()
+const map = ref();
+const mapStore = useMapStore()
+const layoutStore = useLayoutStore()
 
-const onMapLoad = ({ map }) => {
+const defaultSideBarRef = shallowRef(DefaultSideBar);
+
+onMounted(() => {
+  layoutStore.setSideBarContext({
+    component: defaultSideBarRef,
+  })
+});
+
+onUnmounted(() => {
+  layoutStore.setSideBarContext({
+    component: null,
+  })
+});
+
+const onMapLoad = ({ map }: {map: Map}) => {
   const canvas = map.getCanvas() as HTMLCanvasElement
   if (canvas) {
     canvas.addEventListener('dragstart', (e) => e.preventDefault())
   }
+  
+  mapStore.setMap(map);
   
   map.on('click', 'unclustered-points', (e) => {
     const props = e.features?.[0]?.properties

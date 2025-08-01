@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const layoutStore = useLayoutStore();
 
 </script>
 
@@ -6,9 +7,14 @@
   <div>
     <DefaultHeader />
     <main>
+      <component
+          :is="layoutStore.sidebarContext.component"
+          v-if="layoutStore.sidebarContext.component"
+          v-bind="layoutStore.sidebarContext.props" />
+<!--      <DefaultSideBar />-->
       <NuxtPage />
     </main>
-<!--    <DefaultFooter />-->
+    <DefaultFooter />
   </div>
 </template>
 
