@@ -23,14 +23,25 @@ import SvgLogo from '~/assets/svg/logo.svg'
     <div class="profile">
       <!--   TODO: make profile image change if user is not logged in   -->
       <img src="" alt="">
+      <div class="icon">
+        <Icon name="mdi:cog" size="12" />
+      </div>
     </div>
   </div>
 </header>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+@use '@/assets/css/global' as *;
+
+%header-shadow {
+  filter:
+      drop-shadow(0 15px 10px rgba(0, 0, 0, 0.3))
+      drop-shadow(0 5px 4px rgba(0, 0, 0, 0.22));
+}
+
 header {
-  position: absolute;
+  position: fixed;
   top: 12px;
   left: 50%;
   transform: translateX(-50%);
@@ -45,21 +56,15 @@ header {
   width: 96%;
   max-width: 680px;
   height: 80px;
-  padding: 16px 36px 10px;
+  padding: 13px 36px 10px;
   background-color: rgba(90, 90, 90, 0.4);
   border-radius: 24px;
 
-  backdrop-filter: blur(8px);
+  @extend %glass-base;
   
   & :is(.left, .right) {
     flex: 1;
   }
-
-  box-shadow: 
-      0 0 25px rgba(0, 0, 0, 0.2),
-      0 6px 8px rgba(0, 0, 0, 0.4),
-      inset -1px -1px 1px rgba(255, 255, 255, 0.5),
-      inset 2px 2px 1px rgba(255, 255, 255, 0.5);
   
   & > div.left {
     display: flex;
@@ -74,14 +79,36 @@ header {
       text-decoration: none;
       line-height: 16px;
       
+      background-color: rgba(76, 76, 76, 0.4);
+      
+      padding: 8px 14px;
+      border-radius: 10px;
+
+      box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+      transition: all 0.3s;
+      
+       margin-bottom: 2px;
+      
+      
       &.router-link-active {
-        color: #FFCC00;
+        transform: scale(1.03) translateY(-2px);
+        box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 8px 12px rgba(0,0,0,0.22);
+        background-color: #FC0;
+        color: black;
       }
       
       &:hover {
-        text-decoration: underline;
-        text-decoration-color: #FFCC00;
+        transform: scale(1.03) translateY(-2px);
+        box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 8px 12px rgba(0,0,0,0.22);
+        background-color: #FC0;
+        color: black;
       }
+    }
+  }
+  
+  & > div.center {
+    svg {
+      @extend %header-shadow;
     }
   }
   
@@ -104,6 +131,26 @@ header {
       border-radius: 50%;
       
       background-color: rgba(255, 255, 255, 0.6);
+      cursor: pointer;
+      
+      @extend %header-shadow;
+      position: relative;
+      
+      & > div.icon {
+        position: absolute;
+        bottom: -3px;
+        right: -3px;
+        
+        width: 18px;
+        height: 18px;
+        
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        background-color: rgba(0, 0, 0, 0.8);
+        border-radius: 50%;
+      }
     }
   }
 }

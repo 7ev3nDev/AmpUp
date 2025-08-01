@@ -22,7 +22,7 @@ import SvgLogo from '~/assets/svg/logo.svg'
 
 <style scoped>
 footer {
-  position: absolute;
+  position: fixed;
   bottom: 12px;
   left: 50%;
   transform: translateX(-50%);

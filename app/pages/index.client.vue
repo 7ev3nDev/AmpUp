@@ -7,8 +7,9 @@ import {
 } from '@indoorequal/vue-maplibre-gl';
 import type { Map } from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css'
+import { IndexSideBar } from "#components";
 
-import DefaultSideBar from "~/components/DefaultSideBar.vue";
+
 
 const mapStyleUrl = 'https://api.maptiler.com/maps/toner-v2/style.json?key=r1YS7QfxD3sbOvLMbT9K'
 const geojsonUrl = '/api/venues.geojson'
@@ -17,7 +18,7 @@ const map = ref();
 const mapStore = useMapStore()
 const layoutStore = useLayoutStore()
 
-const defaultSideBarRef = shallowRef(DefaultSideBar);
+const defaultSideBarRef = shallowRef(IndexSideBar);
 
 onMounted(() => {
   layoutStore.setSideBarContext({
@@ -38,16 +39,10 @@ const onMapLoad = ({ map }: {map: Map}) => {
   }
   
   mapStore.setMap(map);
-  
-  map.on('click', 'unclustered-points', (e) => {
-    const props = e.features?.[0]?.properties
-    if (props) alert(props.name)
-  })
 }
 </script>
 
 <template>
-  <ClientOnly>
     <MglMap
         ref="map"
         :map-style="mapStyleUrl"
@@ -58,7 +53,6 @@ const onMapLoad = ({ map }: {map: Map}) => {
     >
 <!--      <MglGeoJsonSource />-->
     </MglMap>
-  </ClientOnly>
 </template>
 
 <style scoped>

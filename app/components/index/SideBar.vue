@@ -1,15 +1,20 @@
 <script setup lang="ts">
+import Divisor from "~/components/ui/Divisor.vue";
+
 const mapStore = useMapStore()
 </script>
 
 <template>
 <aside>
-  <h3>Events nearby</h3>
+  <h3>Nearby you</h3>
+  <Divisor direction="horizontal" length="60%" />
   {{ mapStore.center }}
 </aside>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+@use '~/assets/css/global' as *;
+
 aside {
   position: absolute;
   left: 12px;
@@ -30,12 +35,7 @@ aside {
   background-color: rgba(90, 90, 90, 0.4);
   border-radius: 24px;
 
-  backdrop-filter: blur(8px);
-  box-shadow:
-      0 0 25px rgba(0, 0, 0, 0.2),
-      0 6px 8px rgba(0, 0, 0, 0.4),
-      inset -1px -1px 1px rgba(255, 255, 255, 0.5),
-      inset 2px 2px 1px rgba(255, 255, 255, 0.5);
+  @extend %glass-base;
 }
 
 </style>

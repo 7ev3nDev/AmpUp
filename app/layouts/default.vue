@@ -11,7 +11,7 @@ const layoutStore = useLayoutStore();
           :is="layoutStore.sidebarContext.component"
           v-if="layoutStore.sidebarContext.component"
           v-bind="layoutStore.sidebarContext.props" />
-<!--      <DefaultSideBar />-->
+<!--      <SideBar />-->
       <NuxtPage />
     </main>
     <DefaultFooter />
