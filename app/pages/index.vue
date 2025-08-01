@@ -9,8 +9,6 @@ import type { Map } from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css'
 import { IndexSideBar } from "#components";
 
-
-
 const mapStyleUrl = 'https://api.maptiler.com/maps/toner-v2/style.json?key=r1YS7QfxD3sbOvLMbT9K'
 const geojsonUrl = '/api/venues.geojson'
 
@@ -43,6 +41,7 @@ const onMapLoad = ({ map }: {map: Map}) => {
 </script>
 
 <template>
+  <ClientOnly>
     <MglMap
         ref="map"
         :map-style="mapStyleUrl"
@@ -51,8 +50,9 @@ const onMapLoad = ({ map }: {map: Map}) => {
         height="100vh"
         @map:load="onMapLoad"
     >
-<!--      <MglGeoJsonSource />-->
+      <!--      <MglGeoJsonSource />-->
     </MglMap>
+  </ClientOnly>
 </template>
 
 <style scoped>
